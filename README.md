@@ -1,4 +1,3 @@
-# Import necessary libraries
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -12,11 +11,11 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import Ridge, Lasso
 from xgboost import XGBRegressor
 
-# Load sample dataset
-from sklearn.datasets import load_boston
-boston = load_boston()
-df = pd.DataFrame(boston.data, columns=boston.feature_names)
-df['PRICE'] = boston.target
+# Load the California housing dataset instead of load_boston
+from sklearn.datasets import fetch_california_housing
+housing = fetch_california_housing()
+df = pd.DataFrame(housing.data, columns=housing.feature_names)
+df['PRICE'] = housing.target  # Assuming 'PRICE' is the target variable name
 
 # 1. Data Preprocessing
 X = df.drop('PRICE', axis=1)
@@ -55,4 +54,3 @@ plt.figure(figsize=(10,6))
 plt.title("Feature Importances - Random Forest")
 sns.barplot(x=importances[indices], y=features[indices])
 plt.show()
-
